@@ -92,6 +92,9 @@ entities:
 #  PIG: 10
 #  HORSE: 10
 #  WITCH: 10
+#  MINECART_HOPPER: 16
+#  MINECART_CHEST: 16
+#  MINECART: 30
 
 # Exclude these worlds from limits.  
 excluded-worlds: []
