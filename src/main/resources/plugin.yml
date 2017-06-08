@@ -3,7 +3,7 @@ main: com.cyprias.chunkspawnerlimiter.ChunkSpawnerLimiterPlugin
 author: Cyprias
 authors: [Jikoo]
 description: Limit entities in a chunk.
-version: 3.1.0
+version: ${project.version}
 
 permissions:
  chunkspawnerlimiter.admin:
