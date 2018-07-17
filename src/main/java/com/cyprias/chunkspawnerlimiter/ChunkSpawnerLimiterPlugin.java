@@ -26,8 +26,6 @@ import org.bukkit.entity.WaterMob;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import org.mcstats.Metrics;
-
 import com.cyprias.chunkspawnerlimiter.listeners.EntityListener;
 import com.cyprias.chunkspawnerlimiter.listeners.WorldListener;
 
@@ -36,7 +34,6 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 	private List<String> ignoreMetadata, excludedWorlds;
 	private EntityListener entityListener;
 	private WorldListener worldListener;
-	private Metrics metrics;
 
 	@Override
 	public void onEnable() {
@@ -77,21 +74,6 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 			getLogger().severe("No listeners are enabled, the plugin will do nothing!");
 			getLogger().severe("Enable creature spawn monitoring, active inspections, or chunk load inspections.");
 			getLogger().severe("Edit your configuration and then run '/csl reload'");
-		}
-
-		// Start the Metrics.
-		if (getConfig().getBoolean("properties.use-metrics")) {
-			if (metrics == null) {
-				try {
-					metrics = new Metrics(this);
-					metrics.start();
-				} catch (IOException e) {}
-			}
-		} else if (metrics != null) {
-			// Our own metrics stop method to disable without disabling for all plugins or cancelling our chunk checks.
-			// For future metrics revision updates, it's basically just the opt-out check from inside the task.
-			metrics.stop();
-			metrics = null;
 		}
 
 		ignoreMetadata = getConfig().getStringList("properties.ignore-metadata");

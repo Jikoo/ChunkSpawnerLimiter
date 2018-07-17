@@ -3,9 +3,6 @@ properties:
   # Show debug messages.
   debug-messages: false
 
-  # Help the developer know how popular the plugin is.
-  use-metrics: true
-
   # Check a chunk upon load (ChunkLoadEvent).
   check-chunk-load: false
 
@@ -46,7 +43,7 @@ spawn-reasons:
   EGG: true
   SPAWNER_EGG: true
   LIGHTNING: true
-  # These are deprecated, might not work in the future. 
+  # These are deprecated, might not work in the future.
   BED: true
   BUILD_SNOWMAN: true
   BUILD_IRONGOLEM: true
@@ -96,7 +93,7 @@ entities:
 #  MINECART_CHEST: 16
 #  MINECART: 30
 
-# Exclude these worlds from limits.  
+# Exclude these worlds from limits.
 excluded-worlds: []
 
 messages:
