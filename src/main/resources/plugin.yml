@@ -4,6 +4,7 @@ author: Cyprias
 authors: [Jikoo]
 description: Limit entities in a chunk.
 version: ${project.version}
+api-version: 1.13
 
 permissions:
  chunkspawnerlimiter.admin:
