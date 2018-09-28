@@ -261,13 +261,13 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 	public static String getMobGroup(Entity entity) {
 		// Determine the general group this mob belongs to.
 		if (entity instanceof Animals) {
-			//     AbstractHorse, ChestedHorse, Chicken, Cow, Donkey, Horse, Llama, Mule, MushroomCow
-			// 	   Ocelot, Parrot, Pig, PolarBear, Rabbit, Sheep, SkeletonHorse, Turtle, Wolf, ZombieHorse
+			//     AbstractHorse, ChestedHorse, Chicken, Cow, Donkey, Horse, Llama, Mule, MushroomCow,
+			//     Ocelot, Parrot, Pig, PolarBear, Rabbit, Sheep, SkeletonHorse, Turtle, Wolf, ZombieHorse
 			return "ANIMAL";
 		}
 
 		if (entity instanceof Monster) {
-			//     Blaze, CaveSpider, Creeper, Drowned, ElderGuardian, Enderman, Endermite, Evoker, Giant
+			//     Blaze, CaveSpider, Creeper, Drowned, ElderGuardian, Enderman, Endermite, Evoker, Giant,
 			//     Guardian, Husk, Illager, Illusioner, PigZombie, Silverfish, Skeleton, Spellcaster, Spider
 			//     Stray, Vex, Vindicator, Witch, Wither, WitherSkeleton, Zombie, ZombieVillager
 			return "MONSTER";
@@ -288,10 +288,10 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 			return "NPC";
 		}
 
-        if (entity instanceof Golem) {
-            //     IronGolem, Shulker, Snowman
-            return "GOLEM";
-        }
+		if (entity instanceof Golem) {
+		    //     IronGolem, Shulker, Snowman
+		    return "GOLEM";
+		}
 
 		// Anything else.
 		return "OTHER";
