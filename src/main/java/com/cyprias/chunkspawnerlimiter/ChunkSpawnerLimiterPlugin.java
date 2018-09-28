@@ -23,6 +23,7 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.Golem;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -260,29 +261,36 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 	public static String getMobGroup(Entity entity) {
 		// Determine the general group this mob belongs to.
 		if (entity instanceof Animals) {
-			// Chicken, Cow, MushroomCow, Ocelot, Pig, Sheep, Wolf
+			//     AbstractHorse, ChestedHorse, Chicken, Cow, Donkey, Horse, Llama, Mule, MushroomCow,
+			// 	   Ocelot, Parrot, Pig, PolarBear, Rabbit, Sheep, SkeletonHorse, Turtle, Wolf, ZombieHorse
 			return "ANIMAL";
 		}
 
 		if (entity instanceof Monster) {
-			// Blaze, CaveSpider, Creeper, Enderman, Giant, PigZombie, Silverfish, Skeleton, Spider,
-			// Witch, Wither, Zombie
+			//     Blaze, CaveSpider, Creeper, Drowned, ElderGuardian, Enderman, Endermite, Evoker, Giant,
+			//     Guardian, Husk, Illager, Illusioner, PigZombie, Silverfish, Skeleton, Spellcaster, Spider
+			//     Stray, Vex, Vindicator, Witch, Wither, WitherSkeleton, Zombie, ZombieVillager
 			return "MONSTER";
 		}
 
 		if (entity instanceof Ambient) {
-			// Bat
+			//     Bat
 			return "AMBIENT";
 		}
 
 		if (entity instanceof WaterMob) {
-			// Squid
+			//     Cod, Dolphin, Fish, PufferFish, Salmon, Squid, TropicalFish
 			return "WATER_MOB";
 		}
 
 		if (entity instanceof NPC) {
 			// Villager
 			return "NPC";
+		}
+
+		if (entity instanceof Golem) {
+			//     IronGolem, Shulker, Snowman
+			return "GOLEM";
 		}
 
 		// Anything else.
