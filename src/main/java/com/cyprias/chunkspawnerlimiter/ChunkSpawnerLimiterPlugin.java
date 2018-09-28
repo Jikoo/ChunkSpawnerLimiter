@@ -290,7 +290,7 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 
         if (entity instanceof Golem) {
             //     IronGolem, Shulker, Snowman
-            return "NPC";
+            return "GOLEM";
         }
 
 		// Anything else.
