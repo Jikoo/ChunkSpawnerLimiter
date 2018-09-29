@@ -61,8 +61,10 @@ entities:
   MONSTER: 50
   NPC: 50
   OTHER: 500
+#  GOLEM: 5
 #  WATER_MOB: 5
 #  AMBIENT: 5
+
 #  CREEPER: 10
 #  SHEEP: 10
 #  OCELOT: 10
