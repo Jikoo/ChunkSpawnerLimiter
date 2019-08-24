@@ -36,25 +36,35 @@ properties:
 
 # Spawn reasons to cull on.
 spawn-reasons:
-  NATURAL: true
-  JOCKEY: true
-  CHUNK_GEN: true
-  SPAWNER: true
-  EGG: true
-  SPAWNER_EGG: true
-  LIGHTNING: true
-  # These are deprecated, might not work in the future.
-  BED: true
-  BUILD_SNOWMAN: true
-  BUILD_IRONGOLEM: true
-  BUILD_WITHER: true
-  VILLAGE_DEFENSE: true
-  VILLAGE_INVASION: true
   BREEDING: true
-  SLIME_SPLIT: true
-  REINFORCEMENTS: true
+  BUILD_IRONGOLEM: true
+  BUILD_SNOWMAN: true
+  BUILD_WITHER: true
+  CURED: false
   CUSTOM: true
   DEFAULT: true
+  DISPENSE_EGG: true
+  DROWNED: false
+  EGG: true
+  ENDER_PEARL: true
+  EXPLOSION: false
+  INFECTION: false
+  JOCKEY: true
+  LIGHTNING: true
+  MOUNT: true
+  NATURAL: true
+  NETHER_PORTAL: true
+  OCELOT_BABY: true
+  REINFORCEMENTS: true
+  SHEARED: false
+  SHOULDER_ENTITY: false
+  SILVERFISH_BLOCK: true
+  SLIME_SPLIT: true
+  SPAWNER: true
+  SPAWNER_EGG: true
+  TRAP: true
+  VILLAGE_DEFENSE: true
+  VILLAGE_INVASION: true
 
 entities:
   ANIMAL: 50

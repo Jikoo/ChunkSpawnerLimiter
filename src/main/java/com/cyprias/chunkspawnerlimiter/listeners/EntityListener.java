@@ -43,14 +43,13 @@ public class EntityListener implements Listener {
 		int endX = chunk.getX() + surrounding + 1;
 		int endZ = chunk.getZ() + surrounding + 1;
 
-		World w = event.getLocation().getWorld();
+		World world = chunk.getWorld();
 		for (; x < endX; x++) {
 			for (; z < endZ; z++) {
-				// Logger.debug("Checking chunk " + x + " " +z);
-				if (!w.isChunkLoaded(x, z)) {
+				if (!world.isChunkLoaded(x, z)) {
 					continue;
 				}
-				plugin.checkChunk(w.getChunkAt(x, z), null);
+				plugin.checkChunk(world.getChunkAt(x, z), null);
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package com.cyprias.chunkspawnerlimiter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,7 +105,12 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 			return;
 		}
 		YamlConfiguration diskConfig = YamlConfiguration.loadConfiguration(configFile);
-		BufferedReader buffered = new BufferedReader(new InputStreamReader(getResource("config.yml")));
+		InputStream configStream = getResource("config.yml");
+		if (configStream == null) {
+			getLogger().severe("Config file is not present in plugin! Please re-download.");
+			return;
+		}
+		BufferedReader buffered = new BufferedReader(new InputStreamReader(configStream));
 		YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(buffered);
 		try {
 			buffered.close();
@@ -139,7 +145,7 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 		}
 
 		Entity[] entities = chunk.getEntities();
-		HashMap<String, ArrayList<Entity>> types = new HashMap<String, ArrayList<Entity>>();
+		HashMap<String, ArrayList<Entity>> types = new HashMap<>();
 
 		nextChunkEntity: for (int i = entities.length - 1; i >= 0; i--) {
 			Entity chunkEntity = entities[i];
@@ -161,14 +167,14 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 
 			if (getConfig().contains("entities." + eType)) {
 				if (!types.containsKey(eType)) {
-					types.put(eType, new ArrayList<Entity>());
+					types.put(eType, new ArrayList<>());
 				}
 				types.get(eType).add(chunkEntity);
 			}
 
 			if (getConfig().contains("entities." + eGroup)) {
 				if (!types.containsKey(eGroup)) {
-					types.put(eGroup, new ArrayList<Entity>());
+					types.put(eGroup, new ArrayList<>());
 				}
 				types.get(eGroup).add(chunkEntity);
 			}
@@ -216,13 +222,13 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 			debug("Removing " + (entry.getValue().size() - limit) + " " + eType + " @ "
 					+ chunk.getX() + " " + chunk.getZ());
 
-			if (getConfig().getBoolean("properties.notify-players")) {
-				String notification = String.format(ChatColor.translateAlternateColorCodes('&',
-						getConfig().getString("messages.removedEntites")),
+			String notification = getConfig().getString("messages.removedEntites");
+			if (notification != null && getConfig().getBoolean("properties.notify-players")) {
+				notification = String.format(ChatColor.translateAlternateColorCodes('&', notification),
 						entry.getValue().size() - limit, eType);
 				for (int i = entities.length - 1; i >= 0; i--) {
 					if (entities[i] instanceof Player) {
-						((Player) entities[i]).sendMessage(notification);
+						entities[i].sendMessage(notification);
 					}
 				}
 			}
@@ -258,11 +264,11 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 		}
 	}
 
-	public static String getMobGroup(Entity entity) {
+	private static String getMobGroup(Entity entity) {
 		// Determine the general group this mob belongs to.
 		if (entity instanceof Animals) {
 			//     AbstractHorse, ChestedHorse, Chicken, Cow, Donkey, Horse, Llama, Mule, MushroomCow,
-			// 	   Ocelot, Parrot, Pig, PolarBear, Rabbit, Sheep, SkeletonHorse, Turtle, Wolf, ZombieHorse
+			//     Ocelot, Parrot, Pig, PolarBear, Rabbit, Sheep, SkeletonHorse, Turtle, Wolf, ZombieHorse
 			return "ANIMAL";
 		}
 
