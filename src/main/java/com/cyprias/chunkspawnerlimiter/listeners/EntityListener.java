@@ -1,29 +1,29 @@
 package com.cyprias.chunkspawnerlimiter.listeners;
 
+import com.cyprias.chunkspawnerlimiter.ChunkSpawnerLimiterPlugin;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-
-import com.cyprias.chunkspawnerlimiter.ChunkSpawnerLimiterPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityListener implements Listener {
 
 	private final ChunkSpawnerLimiterPlugin plugin;
 
-	public EntityListener(ChunkSpawnerLimiterPlugin plugin) {
+	public EntityListener(@NotNull ChunkSpawnerLimiterPlugin plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler(ignoreCancelled = true)
-	public void onCreatureSpawnEvent(CreatureSpawnEvent event) {
+	public void onCreatureSpawnEvent(final @NotNull CreatureSpawnEvent event) {
 
 		String reason = event.getSpawnReason().toString();
 
 		if (!plugin.getConfig().getBoolean("spawn-reasons." + reason)
 				|| !plugin.getConfig().getBoolean("spawn-reasons." + reason)) {
-			plugin.debug("Ignoring " + event.getEntity().getType().toString() + " due to spawnreason " + reason);
+			plugin.debug(() -> "Ignoring " + event.getEntity().getType().toString() + " due to spawnreason " + reason);
 			return;
 		}
 

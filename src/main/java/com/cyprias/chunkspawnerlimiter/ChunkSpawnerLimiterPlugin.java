@@ -1,5 +1,7 @@
 package com.cyprias.chunkspawnerlimiter;
 
+import com.cyprias.chunkspawnerlimiter.listeners.EntityListener;
+import com.cyprias.chunkspawnerlimiter.listeners.WorldListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
+import java.util.function.Supplier;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.command.Command;
@@ -18,24 +20,23 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Ambient;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Golem;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WaterMob;
-import org.bukkit.entity.Golem;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.cyprias.chunkspawnerlimiter.listeners.EntityListener;
-import com.cyprias.chunkspawnerlimiter.listeners.WorldListener;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 
 	private List<String> ignoreMetadata, excludedWorlds;
-	private EntityListener entityListener;
-	private WorldListener worldListener;
+	private @Nullable EntityListener entityListener;
+	private @Nullable WorldListener worldListener;
 
 	@Override
 	public void onEnable() {
@@ -89,7 +90,7 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 		if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 			this.reloadConfig();
 			this.onEnable();
@@ -125,7 +126,7 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 		}
 	}
 
-	public boolean checkChunk(Chunk chunk, Entity entity) {
+	public boolean checkChunk(@NotNull Chunk chunk, @Nullable Entity entity) {
 		// Stop processing quickly if this world is excluded from limits.
 		if (excludedWorlds.contains(chunk.getWorld().getName())) {
 			return false;
@@ -219,7 +220,7 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 				continue;
 			}
 
-			debug("Removing " + (entry.getValue().size() - limit) + " " + eType + " @ "
+			debug(() -> "Removing " + (entry.getValue().size() - limit) + " " + eType + " @ "
 					+ chunk.getX() + " " + chunk.getZ());
 
 			String notification = getConfig().getString("messages.removedEntites");
@@ -258,9 +259,9 @@ public class ChunkSpawnerLimiterPlugin extends JavaPlugin {
 		return false;
 	}
 
-	public void debug(String mess) {
+	public void debug(@NotNull Supplier<String> mess) {
 		if (getConfig().getBoolean("properties.debug-messages")) {
-			getLogger().info("[Debug] " + mess);
+			getLogger().info("[Debug] " + mess.get());
 		}
 	}
 

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ChunkSpawnerLimiter</groupId>
   <artifactId>ChunkSpawnerLimiter</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.1</version>
   <name>ChunkSpawnerLimiter</name>
   <description>Limit entities in chunks.</description>
   <repositories>
@@ -13,10 +13,22 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>org.bukkit</groupId>
-      <artifactId>bukkit</artifactId>
-      <version>1.14.4-R0.1-SNAPSHOT</version>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>1.16.1-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>19.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>

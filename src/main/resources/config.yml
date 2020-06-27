@@ -36,10 +36,12 @@ properties:
 
 # Spawn reasons to cull on.
 spawn-reasons:
+  BEEHIVE: true
   BREEDING: true
   BUILD_IRONGOLEM: true
   BUILD_SNOWMAN: true
   BUILD_WITHER: true
+  CHUNK_GEN: false
   CURED: false
   CUSTOM: true
   DEFAULT: true
@@ -55,6 +57,8 @@ spawn-reasons:
   NATURAL: true
   NETHER_PORTAL: true
   OCELOT_BABY: true
+  PATROL: true
+  RAID: true
   REINFORCEMENTS: true
   SHEARED: false
   SHOULDER_ENTITY: false
